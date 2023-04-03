@@ -17,7 +17,7 @@ class TodoController extends Controller
     {
         $user = Auth()->user();
         sleep(3);
-        $data = Todo::query()->where('user_id', $user->id)->get();
+        $data = Todo::where('user_id', $user->id)->get();
         return response()->json(['status' => true, 'data' => $data]);
     }
 

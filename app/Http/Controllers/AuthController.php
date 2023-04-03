@@ -16,7 +16,7 @@ class AuthController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(),
             [
-                'name' => 'required',
+                'name' => 'required|unique:users,name',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required'
             ]);
@@ -55,7 +55,7 @@ class AuthController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(),
                 [
-                    'email' => 'required',
+                    'name' => 'required',
                     'password' => 'required'
                 ]);
 
@@ -67,14 +67,14 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if(!Auth::attempt($request->only(['email', 'password']))){
+            if(!Auth::attempt($request->only(['name', 'password']))){
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password does not exist.',
+                    'message' => 'Username & Password does not exist.',
                 ], 401);
             }
 
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('name', $request->name)->first();
 
             return response()->json([
                 'status' => true,

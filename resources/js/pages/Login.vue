@@ -15,13 +15,13 @@
                     class="block text-grey-darker text-sm font-bold mb-2"
                     for="username"
                 >
-                    Email Address
+                    User name
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                     id="username"
                     type="text"
-                    v-model="form.email"
+                    v-model="form.name"
                     required
                 />
             </div>
@@ -69,7 +69,7 @@ export default {
         const errors = ref()
         const router = useRouter();
         const form = reactive({
-            email: '',
+            name: '',
             password: '',
         })
         const handleLogin = async () => {
